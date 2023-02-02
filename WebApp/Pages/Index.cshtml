@@ -1,0 +1,24 @@
+﻿@page
+@using WebApp.ViewModels;
+@{
+
+}
+
+<div class="row">
+    <div class="side">
+        Описание соцсети
+    </div>
+
+
+    <div class="main">
+        @{
+            var regModel = new RegisterViewModel();
+            <partial name="Register", model ="regModel"/>
+
+            var logModel = new LoginViewModel();
+            <partial name="Login", model = "logModel"/>
+        }
+        
+        Блок авторизации
+    </div>
+</div>    

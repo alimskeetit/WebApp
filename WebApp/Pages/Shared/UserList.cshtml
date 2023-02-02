@@ -1,0 +1,28 @@
+﻿@model WebApp.ViewModels.SearchViewModel
+@{
+}
+
+<div class="blocck-reg background-white">
+	<div class="righ-align">
+		<form method="post" asp-controller="AccountManager" asp-action="UserList">
+			<i class="fa fa-search"></i>
+            <input type="text" placeholder="Поиск" name="search">
+		</form>
+	</div>
+    @if (Model != null)
+    @if (Model.UserList != null)
+        @if (Model.UserList.Count != 0)
+        {
+            @foreach (var user in Model.UserList)
+            {
+                <div>
+                    <label>@user.GetFullName()</label>
+                </div>
+            }
+
+        }
+        else
+        {
+            <label> Поиск не дал результатов.</label>
+        }
+</div>
