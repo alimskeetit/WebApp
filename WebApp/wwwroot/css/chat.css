@@ -1,0 +1,10 @@
+﻿.lined-block {
+    border-right: 0;
+    border-left: 0;
+    border-bottom: 1px;
+    border-top: 1px;
+    border-color: #ddd;
+    padding: 10px;
+    border-style: dashed;
+    margin: 10px;
+}

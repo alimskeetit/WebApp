@@ -7,6 +7,8 @@ using AutoMapper;
 using WebApp.ViewModels;
 using WebApp.Mapping;
 using WebApp.AccountManager;
+using WebApp.DB.Model;
+using WebApp.DB.Repo;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,7 +32,8 @@ builder.Services
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-
+builder.Services.AddScoped<IRepository<Friend>, FriendRepository>();
+builder.Services.AddScoped<IRepository<Message>, MessageRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -101,7 +101,7 @@ namespace WebApp.Controllers
 
         private async Task<SearchViewModel> CreateSearch(string search)
         {
-            var result = await _userManager.GetUserAsync(User);
+            var currentUser = await _userManager.GetUserAsync(User);
             var list = _userManager.Users.AsEnumerable().Where(user => user.GetFullName().ToLower().Contains(search.ToLower())).ToList();
             var withfriend = await GetAllFriends();
 
@@ -109,12 +109,13 @@ namespace WebApp.Controllers
             list.ForEach(x =>
             {
                 var t = _mapper.Map<UserWithFriendExt>(x);
-                t.IsFriendWithCurrent = withfriend.Where(y => y.Id == x.Id || x.Id == result.Id).Count() != 0;
+                t.IsFriendWithCurrent = withfriend.Where(y => y.Id == x.Id || x.Id == currentUser.Id).Count() != 0;
                 data.Add(t);
             });
 
             var model = new SearchViewModel()
-            {
+            {   
+                UserId = currentUser.Id,
                 UserList = data
             };
 
@@ -138,7 +139,6 @@ namespace WebApp.Controllers
 
         public async Task<IActionResult> AddFriend(string id)
         {
-
             var repo = _unitOfWork.GetRepository<Friend>() as FriendRepository;
 
             //добаляем User друга по id
@@ -153,16 +153,82 @@ namespace WebApp.Controllers
             
             //удаляем у User друга по id
             repo.DeleteFriend(await _userManager.GetUserAsync(User), await _userManager.FindByIdAsync(id));
-            
+
             return RedirectToAction("MyPage", "AccountManager");
         }
 
         [Route("UserList")]
         [HttpGet]
+        public IActionResult UserList(SearchViewModel model)
+        {
+            return View("UserList", model);
+        }
+
+        [Route("UserList")]
+        [HttpPost]
         public async Task<IActionResult> UserList(string search)
         {
             var model = await CreateSearch(search);
-            return View("UserList", model);
+            return UserList(model);
+        }
+
+        [Route("Chat")]
+        [HttpPost]
+        public async Task<IActionResult> Chat(string id)
+        {
+            //Получаем текущего пользователя из БД
+            var user = await _userManager.GetUserAsync(User);
+
+            //Получаем друга из БД
+            var friend = await _userManager.FindByIdAsync(id);
+
+            //Репозиторий для работы с БД
+            var repo = _unitOfWork.GetRepository<Message>() as MessageRepository;
+
+            var messages = repo.GetMessages(user, friend);
+
+            var model = new ChatViewModel()
+            {
+                You = user,
+                ToWhom = friend,
+                History = messages.OrderBy(x => x.Id).ToList()
+            };
+
+            return View("Chat", model);
+        }
+
+        [Route("NewMessage")]
+        [HttpPost]
+        public async Task<IActionResult> NewMessage(string id, ChatViewModel chat)
+        {
+            //Получаем текущего пользователя из БД
+            var user = await _userManager.GetUserAsync(User);
+
+            //Получаем друга из БД
+            var friend = await _userManager.FindByIdAsync(id);
+
+            //Репозиторий для работы с БД
+            var repo = _unitOfWork.GetRepository<Message>() as MessageRepository;
+
+            var item = new Message()
+            {
+                Sender = user,
+                Recipient = friend,
+                Text = chat.NewMessage.Text
+            };
+
+            repo.Create(item);
+
+            var messages = repo.GetMessages(user, friend);
+
+            var model = new ChatViewModel()
+            {
+                You = user,
+                ToWhom = friend,
+                History = messages.OrderBy(x => x.Id).ToList()
+            };
+
+            return View("Chat", model);
         }
     }
 }

@@ -3,6 +3,12 @@
 }
 
 <div class="blocck-reg background-white">
+    <div>
+            <form method="get" asp-controller="AccountManager" asp-action="MyPage">
+                <input class="enter_submit" type="submit" value="Назад" />
+            </form>
+    </div>
+
 	<div class="righ-align">
 		<form method="post" asp-controller="AccountManager" asp-action="UserList">
 			<i class="fa fa-search"></i>
@@ -17,6 +23,14 @@
             {
                 <div>
                     <label>@user.GetFullName()</label>
+                        @if (!@user.IsFriendWithCurrent && Model.UserId != user.Id)
+                        {
+                            <form asp-controller="AccountManager" asp-action="AddFriend" asp-route-id="@user.Id" method="post">
+                                <button type="submit" class="btn btn-sm btn-primary">
+                                    Добавить в друзья
+                                </button>
+                            </form>
+                        }
                 </div>
             }
 

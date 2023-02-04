@@ -15,6 +15,7 @@ namespace WebApp
 
         public void Dispose()
         {
+            _appContext.Dispose();
         }
 
         public IRepository<TEntity> GetRepository<TEntity>(bool hasCustomRepository = true) where TEntity : class

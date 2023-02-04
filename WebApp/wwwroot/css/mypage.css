@@ -1,7 +1,18 @@
 ﻿.user-image {
-    display: inline;
+    -ms-flex: 40%; /* IE10 */
+    flex: 40%;
+    padding: 20px;
 }
 
-.user-info{
-    float: right;
+.friend-image {
+    width: 20%;
+    max-width: max-content;
+}
+
+.user-data {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    box-sizing: border-box;
+    align-content: center;
 }

@@ -3,26 +3,36 @@
 }
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.10/jquery.validate.unobtrusive.min.js"></script>
-<div>
-	<h3>@Model.User.GetFullName()</h3>
-	<span class="user-image">
+<div class="user-data">
+
+	
+	<div class="user-image">
+		<h3>@Model.User.GetFullName()</h3>
+
 		<img src="@Model.User.Image" width="300" />
-	</span>
-	<span class="user-info">
+		
+		<form method="get" asp-controller="AccountManager" asp-action="Edit">
+			<button>
+			Редактировать
+			</button>
+		</form>
+		
+	</div>
+
+	<div class="user-info">
 		<p>Статус: @Model.User.Status</p>
 		<p>Дата рождения: @Model.User.BirthDate.ToShortDateString()</p>
 		<p>О себе: @Model.User.About</p>
-		<p>Email: @Model.User.Email</p>
+		<p>Email: @Model.User.Email</p
 		
-		<div class="user-friends">
+		<span class="user-friends">
 			<partial name="PartialFriends", model=@Model.Friends />
-		</div>
-	</span>
-	<form method="get" asp-controller="AccountManager" asp-action="Edit">
+		</span>
+	</div>
+
+	<form method="get" asp-controller="AccountManager" asp-action="UserList">
 		<button>
-			Редактировать
+			Найти друзей
 		</button>
 	</form>
-
-
 </div>
