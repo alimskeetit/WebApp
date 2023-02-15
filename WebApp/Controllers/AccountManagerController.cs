@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebApp.AccountManager;
 using WebApp.DB.Model;
 using WebApp.DB.Repo;
+using WebApp.DB.UnitOfWork;
 using WebApp.ViewModels;
 
 namespace WebApp.Controllers

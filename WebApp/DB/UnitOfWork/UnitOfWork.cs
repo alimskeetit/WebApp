@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Infrastructure;
+using WebApp.DB.Repo;
 
-namespace WebApp
+namespace WebApp.DB.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
@@ -10,7 +11,7 @@ namespace WebApp
 
         public UnitOfWork(ApplicationDbContext app)
         {
-            this._appContext = app;
+            _appContext = app;
         }
 
         public void Dispose()

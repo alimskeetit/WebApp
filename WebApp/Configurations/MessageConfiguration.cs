@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using WebApp.DB.Model;
 
-namespace WebApp.DB
+namespace WebApp.Configurations
 {
     public class MessageConfuiguration : IEntityTypeConfiguration<Message>
     {

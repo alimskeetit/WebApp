@@ -1,4 +1,4 @@
-﻿namespace WebApp
+﻿namespace WebApp.DB.Repo
 {
     public interface IRepository<T> where T : class
     {

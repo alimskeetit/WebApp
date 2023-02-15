@@ -1,6 +1,8 @@
-﻿namespace WebApp
+﻿using WebApp.DB.Repo;
+
+namespace WebApp.DB.UnitOfWork
 {
-    public interface IUnitOfWork: IDisposable
+    public interface IUnitOfWork : IDisposable
     {
         int SaveChanges(bool ensureAutoHistory = false);
         IRepository<TEntity> GetRepository<TEntity>(bool hasCustomRepository = true) where TEntity : class;

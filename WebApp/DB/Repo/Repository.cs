@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace WebApp
+namespace WebApp.DB.Repo
 {
     public class Repository<T> : IRepository<T> where T : class
     {

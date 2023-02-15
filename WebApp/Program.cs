@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using WebApp;
 using System.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Identity;
@@ -9,6 +8,8 @@ using WebApp.Mapping;
 using WebApp.AccountManager;
 using WebApp.DB.Model;
 using WebApp.DB.Repo;
+using WebApp.DB.UnitOfWork;
+using WebApp.DB;
 
 var builder = WebApplication.CreateBuilder(args);
 

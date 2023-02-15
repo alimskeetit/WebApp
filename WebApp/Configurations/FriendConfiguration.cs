@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using WebApp.DB.Model;
 
-namespace WebApp.DB
+namespace WebApp.Configurations
 {
     public class FriendConfiguration : IEntityTypeConfiguration<Friend>
     {

@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using WebApp.AccountManager;
-using WebApp.DB;
+using WebApp.Configurations;
 using WebApp.DB.Model;
 using WebApp.DB.Repo;
 
-namespace WebApp
+namespace WebApp.DB
 {
-    public class ApplicationDbContext: IdentityDbContext<User>
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base (options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
             Database.Migrate();
         }
@@ -22,7 +22,7 @@ namespace WebApp
 
             builder.ApplyConfiguration(new FriendConfiguration());
             builder.ApplyConfiguration(new MessageConfuiguration());
-            
+
         }
     }
 }
