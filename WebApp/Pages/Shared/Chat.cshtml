@@ -13,7 +13,7 @@
         </form>
     </div>
 
-    <h4 class="center">Чат @Model.You.FirstName и  @Model.ToWhom.FirstName</h4>
+    <h4 class="center">Чат @Model.You.FirstName @Model.You.LastName и @Model.ToWhom.FirstName @Model.ToWhom.LastName</h4>
 
     <div class="lined-block">
 
@@ -23,7 +23,7 @@
             @foreach (var message in @Model.History)
             {
                 <div>
-                    <label> @message.Sender.FirstName:</label>
+                    <label> @message.Sender.FirstName @message.Sender.LastName:</label>
                     @message.Text
                 </div>
             }

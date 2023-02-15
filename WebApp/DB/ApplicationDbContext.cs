@@ -22,7 +22,6 @@ namespace WebApp.DB
 
             builder.ApplyConfiguration(new FriendConfiguration());
             builder.ApplyConfiguration(new MessageConfuiguration());
-
         }
     }
 }
